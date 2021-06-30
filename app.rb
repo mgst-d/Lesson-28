@@ -24,7 +24,7 @@ configure do
 		(
 			id integer primary key,
 			created_date date,
-			content text
+			content text,
 			post_id integer
 		)'
 end
@@ -66,6 +66,9 @@ post '/details/:h' do
 	h = params[:h]
 
 	content = params[:content]
-
-	erb "You typed comment #{content} for post #{h}"
+	@db.execute 'insert into comments
+		(content, created_date, post_id)
+		values (?, datetime(), ?)', [content, h]
+	
+	redirect to "/details/#{h}"
 end
