@@ -21,7 +21,7 @@ configure do
 			content text
 		)'
 end
-# кавычки возле имен можно не писать!!!
+# кавычки возле имен столбцов можно не писать!!!
 
 
 get '/' do
@@ -34,6 +34,10 @@ end
 
 post '/new' do
 	content = params[:content]
-
-	erb "You typed: #{content}"
+	if content.length <= 0
+		@error = 'Вы ничего не ввели'
+		erb :new
+	else
+		erb "You typed: #{content}"
+	end
 end
