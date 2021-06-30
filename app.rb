@@ -44,3 +44,11 @@ post '/new' do
 	# => redirect to '/'
 	erb "You typed: #{content}"
 end
+
+get '/details/:h' do
+	h = params[:h]
+
+	@results = @db.execute 'select * from posts where id = ?', [h]
+	
+	erb :details
+end
