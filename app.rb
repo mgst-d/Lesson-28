@@ -20,6 +20,13 @@ configure do
 			created_date date,
 			content text
 		)'
+	@db.execute 'create table if not exists Comments 
+		(
+			id integer primary key,
+			created_date date,
+			content text
+			post_id integer
+		)'
 end
 # кавычки возле имен столбцов можно не писать!!!
 
@@ -46,9 +53,19 @@ post '/new' do
 end
 
 get '/details/:h' do
+
+	# получаем переменную из url
 	h = params[:h]
 
 	@results = @db.execute 'select * from posts where id = ?', [h]
 	
 	erb :details
+end
+
+post '/details/:h' do
+	h = params[:h]
+
+	content = params[:content]
+
+	erb "You typed comment #{content} for post #{h}"
 end
