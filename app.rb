@@ -58,7 +58,7 @@ get '/details/:h' do
 	h = params[:h]
 
 	@results = @db.execute 'select * from posts where id = ?', [h]
-	
+	@comments = @db.execute 'select *from comments where post_id = ?', [h]
 	erb :details
 end
 

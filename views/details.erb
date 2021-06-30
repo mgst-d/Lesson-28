@@ -5,6 +5,13 @@
 	Added at: <%= @results[0]['created_date'] %>
 	<br />
 	<h4>Comments:</h4>
+	<% @comments.each do |comment|%>
+		<p>
+			<%= comment['content'] %> <br />
+			<span style="font-size: 75; color: #999" >Added at: <%= comment['created_date'] %></span>
+		</p>
+		<hr />
+	<% end %>
 	<form action="/details/<%= @results[0]['id'] %>" method="post">
 		<textarea name="content" class="form-control" rows="6" placeholder="Введите текст комментария"></textarea>
 		<br />
