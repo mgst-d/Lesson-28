@@ -66,9 +66,14 @@ post '/details/:h' do
 	h = params[:h]
 
 	content = params[:content]
+	if content.length <= 0
+		@error = 'Вы ничего не ввели'
+	else
 	@db.execute 'insert into comments
 		(content, created_date, post_id)
 		values (?, datetime(), ?)', [content, h]
-	
-	redirect to "/details/#{h}"
+	end
+	@results = @db.execute 'select * from posts where id = ?', [h]
+	@comments = @db.execute 'select *from comments where post_id = ?', [h]
+	erb :details
 end
