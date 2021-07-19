@@ -1,0 +1,8 @@
+<h2>Posts:</h2>
+<% @posts.each do |p| %>
+<p>
+	<%= p.post %><br />
+	Добавлено в: <%= p.created_at %><br />
+	<a href="/comments/<%=p.id%>" >Comments! </a>
+</p>
+<% end %>

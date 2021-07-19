@@ -1,0 +1,20 @@
+<h4>Post commentss:</h4>
+<p>
+	<%= @post_list.post %>
+	<br />
+	Added at: <%= @post_list.created_at %>
+	<br />
+	<h4>Comments:</h4>
+	<% @c.each do |body|%>
+		<p>
+			<%= body.comment if body.post_id == :id %> <br />
+			<span style="font-size: 75; color: #999" >Added at: <%= body.created_at %></span>
+		</p>
+		<hr />
+	<% end %>
+	<form action="/comments/<%= params[:id] %>" method="post">
+		<textarea name="content" class="form-control" rows="6" placeholder="Введите текст комментария"></textarea>
+		<br />
+		<button type="submit" class="btn btn-primary">Add comment</button>
+	</form>
+</p>
